@@ -1,11 +1,12 @@
 package tqs.airquality;
 
-public class Fields {
+public class AirQualityInfo {
 
     private String aqi;
     private String o3;
     private String co;
     private String so2;
+    private String no2;
 
     public String getAqi() {
         return aqi;
@@ -37,5 +38,13 @@ public class Fields {
 
     public void setSo2(String so2) {
         this.so2 = so2;
+    }
+
+    public String getNo2() {
+        return no2;
+    }
+
+    public void setNo2(String no2) {
+        this.no2 = no2;
     }
 }

@@ -1,14 +1,14 @@
 package tqs.airquality;
 
 public class AirQuality {
-    private Fields[] data;
+    private AirQualityInfo[] data;
     private long timestamp;
 
-    public Fields[] getData() {
+    public AirQualityInfo[] getData() {
         return data;
     }
 
-    public void setData(Fields[] data) {
+    public void setData(AirQualityInfo[] data) {
         this.data = data;
     }
 

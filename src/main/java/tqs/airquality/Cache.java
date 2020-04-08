@@ -1,5 +1,6 @@
 package tqs.airquality;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 public class Cache {
 
     private static List<City> cities = new ArrayList<>();
-    private static Map<double[], AirQuality> cache = new HashMap<>();
+    private static Map<City, AirQuality> cache = new HashMap<>();
 
     public Cache() {
         throw new IllegalStateException("Cache class");
@@ -22,15 +23,17 @@ public class Cache {
         return cities;
     }
 
-    public static AirQuality getAirQuality(double lat, double lon){
-        double[] city = {lat, lon};
+    public static void saveAirQuality(City city, AirQuality airQuality) {
+        cache.put(city, airQuality);
+    }
+
+    public static AirQuality getAirQuality(City city) {
         return cache.get(city);
     }
 
-    public static void saveAirQuality(double lat, double lon, AirQuality quality) {
-        double[] city = {lat, lon};
-        cache.put(city, quality);
+    // Cidade é válida se estiver na cache há menos de 20min
+    public static boolean validCity(City city) {
+        long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
+        return (cache.containsKey(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
     }
-
-
 }
