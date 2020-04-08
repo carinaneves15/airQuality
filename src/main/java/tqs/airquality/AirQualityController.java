@@ -11,10 +11,4 @@ public class AirQualityController {
 
     @Autowired
     private AirQualityService airQualityService;
-
-    //como faço para ficar /fields/lat=x&lon=y???
-    @GetMapping("/fields")
-    public Fields[] getAirQualityLatLon(){
-        return airQualityService.getFields();
-    }
 }
