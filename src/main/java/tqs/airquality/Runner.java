@@ -11,30 +11,19 @@ import java.util.List;
 public class Runner implements CommandLineRunner {
 
     @Autowired
-    private CityService cityService;
+    private AirQualityService airQualityService;
 
     @Override
     public void run(String... args) throws Exception {
-        // Array List com as cidades válidas
-        List<City> cities = new ArrayList<>();
 
-        // Nomes das cidades a serem instanciadas
-        String[] names = {"Viana-do-Castelo", "Braga", "VilaReal", "Bragança", "Porto", "Aveiro", "Viseu", "Guarda",
+        // Nomes das cidades a serem guardadas
+        String[] cities = {"Viana-do-Castelo", "Braga", "VilaReal", "Bragança", "Porto", "Aveiro", "Viseu", "Guarda",
                 "Coimbra", "CasteloBranco", "Leiria", "Santarém", "Lisboa", "Portalegre", "Évora", "Setubal",
                 "Beja", "Faro", "Funchal", "PontaDelgada"};
 
-        // Instanciação das cidades
-        int nrCities = 0;
-        while (nrCities < names.length) {
-            City c = new City(names[nrCities]);
-            cities.add(c);
-            nrCities++;
-        }
-
         // Guardar cidades
-        for (City c : cities) {
-            cityService.save(c);
+        for (String c : cities ) {
+            airQualityService.saveCity(c);
         }
-
     }
 }
