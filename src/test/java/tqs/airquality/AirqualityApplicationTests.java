@@ -10,7 +10,7 @@ class AirqualityApplicationTests {
 
     @Test
     void contextLoads() {
-        assertEquals(true, true);
+
     }
 
 }
