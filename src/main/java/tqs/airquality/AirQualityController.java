@@ -10,23 +10,23 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/airQuality")
 public class AirQualityController {
 
     @Autowired
     private AirQualityService airQualityService;
 
-    @GetMapping("/airQuality/allCities")
+    @GetMapping("/cities")
     public List<String> getCities() {
-        return airQualityService.getAllCities();
+        return airQualityService.getCities();
     }
 
-    @GetMapping("/airQuality/statistics")
+    @GetMapping("/statistics")
     public HashMap getStatistics () {
         return airQualityService.getStatistics();
     }
 
-    @GetMapping("/airQuality/{city}")
+    @GetMapping("/{city}")
     public AirQualityInfo[] getCityAirQuality (@PathVariable(value = "city") String city) {
         return airQualityService.getAirQualityInfo(city);
     }

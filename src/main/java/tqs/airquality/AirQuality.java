@@ -4,6 +4,15 @@ public class AirQuality {
     private AirQualityInfo[] data;
     private long timestamp;
 
+    public AirQuality() {
+
+    }
+
+    public AirQuality(AirQualityInfo[] data, long timestamp) {
+        this.data = data;
+        this.timestamp = timestamp;
+    }
+
     public AirQualityInfo[] getData() {
         return data;
     }
@@ -19,4 +28,5 @@ public class AirQuality {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
 }

@@ -16,7 +16,7 @@ public class AirQualityService {
         Cache.addCity(city);
     }
 
-    public List<String> getAllCities() {
+    public List<String> getCities() {
         return Cache.getCities();
     }
 
@@ -39,7 +39,6 @@ public class AirQualityService {
         }
         else
             Cache.setHit();
-        System.out.println(Cache.getAirQuality(city).getData());
         return Cache.getAirQuality(city).getData();
     }
 
