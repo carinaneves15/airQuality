@@ -39,7 +39,7 @@ public class AirQualityService {
         }
         else
             Cache.setHit();
-
+        System.out.println(Cache.getAirQuality(city).getData());
         return Cache.getAirQuality(city).getData();
     }
 
