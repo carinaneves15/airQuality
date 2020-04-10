@@ -27,20 +27,6 @@ public class Cache {
         return cities;
     }
 
-    public static void saveAirQuality(String city, AirQuality airQuality) {
-        cache.put(city, airQuality);
-    }
-
-    public static AirQuality getAirQuality(String city) {
-        return cache.get(city);
-    }
-
-    // Request é válido se a cidade estiver na cache há menos de 20min
-    public static boolean validRequest(String city) {
-        long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
-        return (cities.contains(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
-    }
-
     public static HashMap getStatistics() {
         hit++;
         HashMap<String, Integer> statistics = new HashMap<>();
@@ -56,5 +42,20 @@ public class Cache {
     public static void setHit() {
         hit++;
     }
+
+    // Request é válido se a cidade estiver na cache há menos de 20min
+    public static boolean isValid(String city) {
+        long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
+        return (cache.containsKey(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
+    }
+
+    public static void saveAirQuality(String city, AirQuality airQuality) {
+        cache.put(city, airQuality);
+    }
+
+    public static AirQuality getAirQuality(String city) {
+        return cache.get(city);
+    }
+
 
 }

@@ -2,78 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AirQuality</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body {
-            font-family: Arial;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        form.example input[type=text] {
-            padding: 10px;
-            font-size: 17px;
-            border: 1px solid grey;
-            float: left;
-            width: 80%;
-            background: #f1f1f1;
-        }
-
-        form.example button {
-            float: left;
-            width: 20%;
-            padding: 10px;
-            background: #2196F3;
-            color: white;
-            font-size: 17px;
-            border: 1px solid grey;
-            border-left: none;
-            cursor: pointer;
-        }
-
-        form.example button:hover {
-            background: #0b7dda;
-        }
-
-        form.example::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    </style>
-
+    <title>AirQualityPT</title>
 </head>
+<style>
+
+</style>
 <body>
+    <div>
+        <h1>Escolhe uma cidade:</h1>
+    </div>
+    <div>
+        <select class="mdb-select md-form" multiple id="selectCity">
+            <option value="Aveiro">Aveiro</option>
+            <option value="Beja">Beja</option>
+            <option value="Braga">Braga</option>
+            <option value="Bragança">Bragança</option>
+            <option value="CasteloBranco">Castelo Branco</option>
+            <option value="Coimbra">Coimbra</option>
+            <option value="Évora">Évora</option>
+            <option value="Faro">Faro</option>
+            <option value="Funchal">Funchal</option>
+            <option value="Guarda">Guarda</option>
+            <option value="Leiria">Leiria</option>
+            <option value="Lisboa">Lisboa</option>
+            <option value="PontaDelgada">Ponta Delgada</option>
+            <option value="Portalegre">Portalegre</option>
+            <option value="Porto">Porto</option>
+            <option value="Santarém">Santarém</option>
+            <option value="Setubal">Setubal</option>
+            <option value="Viana-do-Castelo">Viana do Castelo</option>
+            <option value="VilaReal">Vila Real</option>
+            <option value="Viseu">Viseu</option>
+        </select>
+        <button onclick="search()" type="button">Obter informação</button>
+    </div>
+    <br>
+    <div id="div0"></div>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <div id="div4"></div>
 
-<h1>Choose a city:</h1>
-
-<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-    <input id="searchText" type="text" placeholder="Search.." name="search2">
-    <button type="button" onclick="search()"><i class="fa fa-search"></i></button>
-</form>
-
-<script>
-    function search() {
-        var local = document.getElementById('searchText').value;
-
-    }
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+    <script>
+        function search() {
+            var c = document.getElementById("selectCity");
+            var city = c.options[c.selectedIndex].value;
+            //document.write('http://localhost:8080/api/airQuality/'+city)
+            fetch('http://localhost:8080/api/airQuality/'+city)
+                .then(res => res.json())
+                .then(json => listAirQualityInfo(json));
         }
-    }
 
-    function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-    }
-</script>
+        function listAirQualityInfo(json) {
+            for (i=0; i<=4; i++) {
+                var div = document.getElementById("div" + i);
+                div.innerHTML = "";
 
+                var p1 = document.createElement("p");
+                var text1 = document.createTextNode("Índice de qualidade do ar: " + json[i]["aqi"]);
+                p1.appendChild(text1);
+                div.append(p1);
+
+                var p2 = document.createElement("p");
+                var text2 = document.createTextNode("Concentração de O3(µg / m³): " + json[i]["o3"]);
+                p2.appendChild(text2);
+                div.append(p2);
+
+                var p3 = document.createElement("p");
+                var text3 = document.createTextNode("Concentração de CO(µg / m³): " + json[i]["co"]);
+                p3.appendChild(text3);
+                div.append(p3);
+
+                var p4 = document.createElement("p");
+                var text4 = document.createTextNode("Concentração de SO2(µg / m³): " + json[i]["so2"]);
+                p4.appendChild(text4);
+                div.append(p4);
+
+                var p5 = document.createElement("p");
+                var text5 = document.createTextNode("Concentração de NO2(µg / m³): " + json[i]["no2"]);
+                p5.appendChild(text5);
+                div.append(p5);
+            }
+        }
+    </script>
 </body>
 </html>

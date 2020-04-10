@@ -20,27 +20,27 @@ public class AirQualityService {
         return Cache.getCities();
     }
 
+    public HashMap getStatistics() {
+        return Cache.getStatistics();
+    }
+
     public void saveAirQuality(String city, AirQuality airQuality) {
-      Cache.saveAirQuality(city, airQuality);
+        Cache.saveAirQuality(city, airQuality);
     }
 
     public AirQualityInfo[] getAirQualityInfo(String city) {
-        if (!Cache.validRequest(city)){
+        if (!Cache.isValid(city)){
+            Cache.setMiss();
             RestTemplate restTemplate = new RestTemplate();
             String finalUrl = URL + city + "&country=PT&key=10dc22630e8244faa7a7a0bf5f6f2dbe";
             AirQuality airQuality = restTemplate.getForObject(finalUrl, AirQuality.class);
             airQuality.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
             this.saveAirQuality(city, airQuality);
-            Cache.setMiss();
         }
         else
             Cache.setHit();
 
         return Cache.getAirQuality(city).getData();
-    }
-
-    public HashMap getStatistics() {
-        return Cache.getStatistics();
     }
 
 

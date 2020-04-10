@@ -21,14 +21,13 @@ public class AirQualityController {
         return airQualityService.getAllCities();
     }
 
-    @GetMapping("/airQuality/{city}")
-    public AirQualityInfo[] getCityAirQuality (@PathVariable(value = "city") String city) {
-        return airQualityService.getAirQualityInfo(city);
-    }
-
     @GetMapping("/airQuality/statistics")
     public HashMap getStatistics () {
         return airQualityService.getStatistics();
     }
 
+    @GetMapping("/airQuality/{city}")
+    public AirQualityInfo[] getCityAirQuality (@PathVariable(value = "city") String city) {
+        return airQualityService.getAirQualityInfo(city);
+    }
 }
