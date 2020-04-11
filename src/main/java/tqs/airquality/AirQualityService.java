@@ -20,7 +20,7 @@ public class AirQualityService {
         return Cache.getCities();
     }
 
-    public HashMap getStatistics() {
+    public HashMap<String, String> getStatistics() {
         return Cache.getStatistics();
     }
 
@@ -28,7 +28,7 @@ public class AirQualityService {
         Cache.saveAirQuality(city, airQuality);
     }
 
-    public AirQualityInfo[] getAirQualityInfo(String city) {
+    public AirQualityInfo[] getAirQuality(String city) {
         if (!Cache.isValid(city)){
             Cache.setMiss();
             RestTemplate restTemplate = new RestTemplate();

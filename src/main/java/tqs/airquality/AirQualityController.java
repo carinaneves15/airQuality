@@ -22,12 +22,12 @@ public class AirQualityController {
     }
 
     @GetMapping("/statistics")
-    public HashMap getStatistics () {
+    public HashMap<String, String> getStatistics () {
         return airQualityService.getStatistics();
     }
 
     @GetMapping("/{city}")
     public AirQualityInfo[] getCityAirQuality (@PathVariable(value = "city") String city) {
-        return airQualityService.getAirQualityInfo(city);
+        return airQualityService.getAirQuality(city);
     }
 }

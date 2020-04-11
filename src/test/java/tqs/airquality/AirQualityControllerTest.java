@@ -79,7 +79,7 @@ class AirQualityControllerTest {
         AirQualityInfo info = new AirQualityInfo("32", "68.2071", "205", "1.51429", "6");
         AirQualityInfo[] airInfo = {info};
         String valid_city = "Lisboa";
-        given(airQualityService.getAirQualityInfo(anyString())).willReturn(airInfo);
+        given(airQualityService.getAirQuality(anyString())).willReturn(airInfo);
         mvc.perform(get("/api/airQuality/".concat(valid_city)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -94,7 +94,7 @@ class AirQualityControllerTest {
     @Test
     public void whenGetCityDoesNotExist_thenReturnNothing() throws Exception {
         String invalid_city = "lisboa";
-        given(airQualityService.getAirQualityInfo(invalid_city)).willReturn(null);
+        given(airQualityService.getAirQuality(invalid_city)).willReturn(null);
         mvc.perform(get("/airQuality/".concat(invalid_city)))
                 .andExpect(status().isNotFound());
     }

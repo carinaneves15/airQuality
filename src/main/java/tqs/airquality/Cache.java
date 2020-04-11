@@ -15,7 +15,7 @@ public class Cache {
     private static List<String> citiesAirInfoIn = new ArrayList<>();
 
     public Cache() {
-        throw new IllegalStateException("Cache class");
+
     }
 
     public static void addCity(String city) {
@@ -46,6 +46,7 @@ public class Cache {
 
     // Válido se a cidade estiver na cache há menos de 20min
     public static boolean isValid(String city) {
+        System.out.println(cache.containsKey(city));
         long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
         return (cache.containsKey(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
     }
@@ -59,5 +60,12 @@ public class Cache {
         return cache.get(city);
     }
 
+    //para testes
+    public static Map<String, AirQuality> getCache() {
+        return cache;
+    }
 
+    public static List<String> getCitiesAirInfoIn() {
+        return citiesAirInfoIn;
+    }
 }
