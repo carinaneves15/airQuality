@@ -10,7 +10,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//tems ou n tem isto @SpringBootTest
+@SpringBootTest
 class CacheTest {
     protected Cache cache = new Cache();
 
@@ -56,7 +56,7 @@ class CacheTest {
 
     @Test
     public void testGetCities_thenAddCities_thenGetCities(){
-        testGetCitiesWithoutCities();
+        testGetCities();
         testAddCitiesThenGet();
     }
 
@@ -67,16 +67,16 @@ class CacheTest {
         cache.addCity(city0);
         cache.addCity(city1);
         List<String> cities = cache.getCities();
-        assertEquals(2, cities.size());
+        assertEquals(22, cities.size());
         assertTrue(cities.contains(city0));
         assertTrue(cities.contains(city1));
-        assertFalse(cities.contains("Lisboa"));
+        assertFalse(cities.contains("TorresNovas"));
     }
 
     @Test
-    private void testGetCitiesWithoutCities() {
+    private void testGetCities() {
         List<String> cities = cache.getCities();
-        assertEquals(0, cities.size());
+        assertEquals(20, cities.size());
     }
 
     @Test
