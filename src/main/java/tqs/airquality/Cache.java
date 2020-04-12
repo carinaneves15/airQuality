@@ -58,8 +58,7 @@ public class Cache {
     }
 
     /**
-     * Checks if a city is valid
-     * That is, it's in the cache and if the lifetime has not passed, 20m
+     * Checks if a city is valid. That is, it's in the cache and if the lifetime has not passed, 20m
      *
      * @param city
      * @return

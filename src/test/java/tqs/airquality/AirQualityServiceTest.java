@@ -52,6 +52,9 @@ class AirQualityServiceTest {
         Mockito.when(cache.getAirQuality("aveiro")).thenReturn(null);
     }
 
+    /**
+     * Test method: List<String> getCities()
+     */
      @Test
      public void givenCities_whenGetAllCities_thenReturn() {
          String city0 ="Porto";
@@ -65,6 +68,9 @@ class AirQualityServiceTest {
             .contains(city0, city1, city2);
      }
 
+    /**
+     * Test method: HashMap<String, String> getStatistics()
+     */
      @Test
      public void givenStatistics_whenGetStatistics_thenReturn() {
          int miss = 3;
@@ -78,6 +84,9 @@ class AirQualityServiceTest {
             .containsValues(String.valueOf(hit), String.valueOf(miss), cities.toString());
      }
 
+    /**
+     * Test method: AirQualityInfo[] getAirQuality(String city)
+     */
      @Test
      public void whenInvalidCity_thenAirQualityInfoShouldBeNull() {
         String invalidCity = "blablabla";
@@ -93,6 +102,9 @@ class AirQualityServiceTest {
 
     }
 
+    /**
+     * Test method: AirQualityInfo[] getAirQuality(String city)
+     */
      @Test
      public void whenValidCity_thenAirQualityInfoShouldBeReturned() {
         String validCity = "Aveiro";

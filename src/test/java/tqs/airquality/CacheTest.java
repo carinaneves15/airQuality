@@ -27,6 +27,9 @@ class CacheTest {
         testAddStatisticsThenGet();
     }
 
+    /**
+     * Test methods: void setMiss() & void setHit() & HashMap getStatistics()
+     */
     @Test
     private void testAddStatisticsThenGet() {
         int hit = 1;
@@ -53,6 +56,9 @@ class CacheTest {
         assertThat(expected).isEqualTo(found);
     }
 
+    /**
+     * Test method: HashMap getStatistics()
+     */
     @Test
     private void testGetStatisticsWithoutStatistics() {
         HashMap<String, String> expected = new HashMap<>();
@@ -71,6 +77,9 @@ class CacheTest {
         testAddCitiesThenGet();
     }
 
+    /**
+     * Test methods: void addCity(String city) & List<String> getCities()
+     */
     @Test
     private void testAddCitiesThenGet() {
         String city0 = "Aveiro";
@@ -85,18 +94,27 @@ class CacheTest {
                 .doesNotContain("TorresNovas");
     }
 
+    /**
+     * Test method: List<String> getCities()
+     */
     @Test
     private void testGetCities() {
         List<String> cities = cache.getCities();
         assertEquals(20, cities.size());
     }
 
+    /**
+     * Test method: boolean isValid(String city)
+     */
     @Test
     public void testIsValidWithValidCity() {
         boolean res = cache.isValid("porto");
         assertThat(res).isTrue();
     }
 
+    /**
+     * Test method: boolean isValid(String city)
+     */
     @Test
     public void testIsValidWithInvalidCity() {
         boolean res0 = cache.isValid("jijij");
@@ -109,6 +127,9 @@ class CacheTest {
         assertThat(res1).isFalse();
     }
 
+    /**
+     * Test method: void saveAirQuality(String city, AirQuality airQuality)
+     */
     @Test
     public void testSaveAirQuality() {
         String city = "Braga";
@@ -120,6 +141,9 @@ class CacheTest {
                 .containsValue(air);
     }
 
+    /**
+     * Test method: AirQuality getAirQuality(String city)
+     */
     @Test
     public void testGetAirQuality() {
         String city = "Tomar";

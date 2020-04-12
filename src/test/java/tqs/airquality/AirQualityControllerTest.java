@@ -1,6 +1,5 @@
 package tqs.airquality;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -38,6 +37,9 @@ class AirQualityControllerTest {
     @MockBean
     private AirQualityService airQualityService;
 
+    /**
+     * Test method: List<String> getCities()
+     */
     @Test
     public void givenCities_whenGetAllCities_thenReturnJsonArray() throws Exception {
         List<String> allCities = new ArrayList<>();
@@ -55,6 +57,9 @@ class AirQualityControllerTest {
                 .andExpect(jsonPath("$[2]", is("Aveiro")));
     }
 
+    /**
+     * Test method: HashMap<String, String> getStatistics()
+     */
     @Test
     public void givenStatistics_whenGetStatistics_thenReturnArrayJson() throws Exception {
         List<String> allCities = new ArrayList<>();
@@ -76,6 +81,9 @@ class AirQualityControllerTest {
                 .andExpect(jsonPath("$.citiesAirInfoIn", is(statistics.get("citiesAirInfoIn"))));
     }
 
+    /**
+     * Test method: AirQualityInfo[] getCityAirQuality(@PathVariable(value = "city") String city)
+     */
     @Test
     public void whenGetAirQuality_theReturnAirQualityInfo() throws Exception {
         AirQualityInfo info = new AirQualityInfo("32", "68.2071", "205", "1.51429", "6");
@@ -92,7 +100,9 @@ class AirQualityControllerTest {
                 .andExpect(jsonPath("$[0]", hasKey("no2")));
 
     }
-
+    /**
+     * Test method: AirQualityInfo[] getCityAirQuality(@PathVariable(value = "city") String city)
+     */
     @Test
     public void whenGetCityDoesNotExist_thenReturnNothing() throws Exception {
         String invalid_city = "coisa";

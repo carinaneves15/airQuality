@@ -24,7 +24,7 @@ public class AirQualityService {
      * Save citu in cache
      * @param city
      */
-    public void saveCity (String city) {
+    public void saveCity(String city) {
         cache.addCity(city);
     }
 
