@@ -10,37 +10,48 @@ import java.util.List;
 @Service
 public class AirQualityService {
 
+    Cache cache = new Cache();
+
     private static final String URL = "http://api.weatherbit.io/v2.0/current/airquality?city=";
 
     public void saveCity (String city) {
-        Cache.addCity(city);
+        cache.addCity(city);
     }
 
     public List<String> getCities() {
-        return Cache.getCities();
+        return cache.getCities();
     }
 
     public HashMap<String, String> getStatistics() {
-        return Cache.getStatistics();
+        return cache.getStatistics();
     }
 
     public void saveAirQuality(String city, AirQuality airQuality) {
-        Cache.saveAirQuality(city, airQuality);
+        cache.saveAirQuality(city, airQuality);
     }
 
     public AirQualityInfo[] getAirQuality(String city) {
-        if (!Cache.isValid(city)){
-            Cache.setMiss();
+        if (!cache.isValid(city.toLowerCase())){
             RestTemplate restTemplate = new RestTemplate();
             String finalUrl = URL + city + "&country=PT&key=10dc22630e8244faa7a7a0bf5f6f2dbe";
             AirQuality airQuality = restTemplate.getForObject(finalUrl, AirQuality.class);
-            airQuality.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
-            this.saveAirQuality(city, airQuality);
+            if (airQuality != null){
+                cache.setMiss();
+                airQuality.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
+                this.saveAirQuality(city, airQuality);
+                return cache.getAirQuality(city).getData();
+            }
+            else {
+                AirQualityInfo nullInfo = new AirQualityInfo();
+                AirQualityInfo[] toReturn = {nullInfo};
+                return toReturn;
+            }
         }
-        else
-            Cache.setHit();
-        return Cache.getAirQuality(city).getData();
-    }
+        else{
+            cache.setHit();
+            return cache.getAirQuality(city).getData();
+        }
 
+    }
 
 }

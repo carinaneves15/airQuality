@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.sql.Timestamp;
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -24,7 +25,9 @@ class CacheTest {
     private void testAddStatisticsThenGet() {
         int hit = 1;
         int miss = 0;
-        List<String> citiesAirInfoIn = Arrays.asList("Porto");
+        Set<String> citiesAirInfoIn = new HashSet<String>();
+        citiesAirInfoIn.add("porto");
+
         AirQuality air = new AirQuality();
         air.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
 
@@ -40,7 +43,8 @@ class CacheTest {
         expected.put("miss", String.valueOf(miss));
         expected.put("hit", String.valueOf(hit));
         expected.put("citiesAirInfoIn", citiesAirInfoIn.toString());
-        assertEquals(expected, found);
+
+        assertThat(expected).isEqualTo(found);
     }
 
     @Test
@@ -51,7 +55,8 @@ class CacheTest {
         expected.put("hit", "1");
         expected.put("citiesAirInfoIn", citiesAirInfoIn.toString());
         HashMap<String, String> found = cache.getStatistics();
-        assertEquals(expected, found);
+
+        assertThat(expected).isEqualTo(found);
     }
 
     @Test
@@ -67,10 +72,11 @@ class CacheTest {
         cache.addCity(city0);
         cache.addCity(city1);
         List<String> cities = cache.getCities();
+
         assertEquals(22, cities.size());
-        assertTrue(cities.contains(city0));
-        assertTrue(cities.contains(city1));
-        assertFalse(cities.contains("TorresNovas"));
+        assertThat(cities)
+                .contains(city0, city1)
+                .doesNotContain("TorresNovas");
     }
 
     @Test
@@ -81,18 +87,20 @@ class CacheTest {
 
     @Test
     public void testIsValidWithValidCity() {
-        boolean res = cache.isValid("Porto");
-        assertTrue(res);
+        boolean res = cache.isValid("porto");
+        assertThat(res).isTrue();
     }
 
     @Test
     public void testIsValidWithInvalidCity() {
-        boolean res0 = cache.isValid("Setubal");
+        boolean res0 = cache.isValid("jijij");
+        assertThat(res0).isFalse();
+
+        //erro no timestamp
         AirQuality air = new AirQuality();
         cache.saveAirQuality("Évora", air);
         boolean res1 = cache.isValid("Évora");
-        assertFalse(res0);
-        assertFalse(res1);
+        assertThat(res1).isFalse();
     }
 
     @Test
@@ -101,10 +109,20 @@ class CacheTest {
         AirQuality air = new AirQuality();
         cache.saveAirQuality(city, air);
         Map<String, AirQuality> inCache = cache.getCache();
-        assertTrue(inCache.containsKey("Braga"));
-        assertEquals(air, inCache.get("Braga"));
+        assertThat(inCache)
+                .containsKey("braga")
+                .containsValue(air);
     }
 
-    // ver se é preciso o testGetAirQuality
+    @Test
+    public void testGetAirQuality() {
+        String city = "Tomar";
+        AirQualityInfo[] info = {new AirQualityInfo("28", "61", "327.11", "3.8", "2.7")};
+        AirQuality air = new AirQuality(info, new Timestamp(System.currentTimeMillis()).getTime());
+        cache.saveAirQuality(city, air);
+        AirQuality returned = cache.getAirQuality("Tomar");
+        assertThat(returned.toString()).isEqualTo(air.toString());
+        assertThat(returned.getData().toString()).isEqualTo(info.toString());
+    }
 
 }

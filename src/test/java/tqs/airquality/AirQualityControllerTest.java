@@ -93,7 +93,7 @@ class AirQualityControllerTest {
 
     @Test
     public void whenGetCityDoesNotExist_thenReturnNothing() throws Exception {
-        String invalid_city = "lisboa";
+        String invalid_city = "coisa";
         given(airQualityService.getAirQuality(invalid_city)).willReturn(null);
         mvc.perform(get("/airQuality/".concat(invalid_city)))
                 .andExpect(status().isNotFound());

@@ -8,7 +8,6 @@ public class AirQualityInfo {
     private String no2;
 
     public AirQualityInfo() {
-
     }
 
     public AirQualityInfo(String aqi, String o3, String co, String so2, String no2) {

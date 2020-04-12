@@ -1,10 +1,7 @@
 package tqs.airquality;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Cache {
 
@@ -12,60 +9,57 @@ public class Cache {
     private static Map<String, AirQuality> cache = new HashMap<>();
     private static int miss = 0;
     private static int hit = 0;
-    private static List<String> citiesAirInfoIn = new ArrayList<>();
 
     public Cache() {
 
     }
 
-    public static void addCity(String city) {
+    public void addCity(String city) {
         cities.add(city);
     }
 
-    public static List<String> getCities() {
+    public List<String> getCities() {
         hit++;
         return cities;
     }
 
-    public static HashMap getStatistics() {
+    public HashMap getStatistics() {
         hit++;
         HashMap<String, String> statistics = new HashMap<>();
         statistics.put("miss", String.valueOf(miss));
         statistics.put("hit", String.valueOf(hit));
-        statistics.put("citiesAirInfoIn", citiesAirInfoIn.toString());
+        statistics.put("citiesAirInfoIn", cache.keySet().toString());
         return statistics;
     }
 
-    public static void setMiss() {
+    public void setMiss() {
         miss++;
     }
 
-    public static void setHit() {
+    public void setHit() {
         hit++;
     }
 
     // Válido se a cidade estiver na cache há menos de 20min
-    public static boolean isValid(String city) {
-        System.out.println(cache.containsKey(city));
+    public boolean isValid(String city) {
         long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
         return (cache.containsKey(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
     }
 
-    public static void saveAirQuality(String city, AirQuality airQuality) {
-        citiesAirInfoIn.add(city);
-        cache.put(city, airQuality);
+    public void saveAirQuality(String city, AirQuality airQuality) {
+        cache.put(city.toLowerCase(), airQuality);
     }
 
-    public static AirQuality getAirQuality(String city) {
-        return cache.get(city);
+    public AirQuality getAirQuality(String city) {
+        return cache.get(city.toLowerCase());
     }
 
     //para testes
-    public static Map<String, AirQuality> getCache() {
+    public Map<String, AirQuality> getCache() {
         return cache;
     }
 
-    public static List<String> getCitiesAirInfoIn() {
-        return citiesAirInfoIn;
+    public Set<String> getCitiesAirInfoIn() {
+        return cache.keySet();
     }
 }
