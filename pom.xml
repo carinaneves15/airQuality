@@ -50,6 +50,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- selenium / junit integration -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>selenium-jupiter</artifactId>
+            <version>3.3.4</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -79,7 +95,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>src/integration-test/java</source>
+                                        <source>src/test/java</source>
                                     </sources>
                                 </configuration>
                             </execution>

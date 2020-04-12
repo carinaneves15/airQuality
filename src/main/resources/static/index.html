@@ -7,34 +7,14 @@
 <style>
 
 </style>
-<body>
+
+<body onload="setUp()">
     <div>
         <h1>Escolhe uma cidade:</h1>
     </div>
     <div>
-        <select class="mdb-select md-form" multiple id="selectCity">
-            <option value="Aveiro">Aveiro</option>
-            <option value="Beja">Beja</option>
-            <option value="Braga">Braga</option>
-            <option value="Bragança">Bragança</option>
-            <option value="CasteloBranco">Castelo Branco</option>
-            <option value="Coimbra">Coimbra</option>
-            <option value="Évora">Évora</option>
-            <option value="Faro">Faro</option>
-            <option value="Funchal">Funchal</option>
-            <option value="Guarda">Guarda</option>
-            <option value="Leiria">Leiria</option>
-            <option value="Lisboa">Lisboa</option>
-            <option value="PontaDelgada">Ponta Delgada</option>
-            <option value="Portalegre">Portalegre</option>
-            <option value="Porto">Porto</option>
-            <option value="Santarém">Santarém</option>
-            <option value="Setubal">Setubal</option>
-            <option value="Viana-do-Castelo">Viana do Castelo</option>
-            <option value="VilaReal">Vila Real</option>
-            <option value="Viseu">Viseu</option>
-        </select>
-        <button onclick="search()" type="button">Obter informação</button>
+        <select id="selectCity"></select>
+        <button onclick="search()" type="button" id="info">Obter informação</button>
     </div>
     <br>
     <div id="div0"></div>
@@ -44,10 +24,24 @@
     <div id="div4"></div>
 
     <script>
+        function setUp() {
+            const drop = document.getElementById("selectCity");
+            const json = fetch("http://localhost:8080/api/airQuality/cities")
+                .then((response) => response.json())
+                .then(function (data) {
+                    for (id in data) {
+                        const city = data[id];
+                        const  option = document.createElement("option");
+                        option.innerHTML = city;
+                        option.value = city;
+                        drop.appendChild(option);
+                    }
+                    ;
+                })
+        }
         function search() {
             var c = document.getElementById("selectCity");
             var city = c.options[c.selectedIndex].value;
-            //document.write('http://localhost:8080/api/airQuality/'+city)
             fetch('http://localhost:8080/api/airQuality/'+city)
                 .then(res => res.json())
                 .then(json => listAirQualityInfo(json));
