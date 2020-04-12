@@ -1,4 +1,4 @@
-package tqs.airquality.unit_integration;
+package tqs.airquality;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package tqs.airquality.unit_integration;
+package tqs.airquality;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
