@@ -7,7 +7,6 @@
 <style>
 
 </style>
-
 <body onload="setUp()">
     <div>
         <h1>Escolhe uma cidade:</h1>
@@ -18,10 +17,6 @@
     </div>
     <br>
     <div id="div0"></div>
-    <div id="div1"></div>
-    <div id="div2"></div>
-    <div id="div3"></div>
-    <div id="div4"></div>
 
     <script>
         function setUp() {
@@ -48,35 +43,34 @@
         }
 
         function listAirQualityInfo(json) {
-            for (i=0; i<=4; i++) {
-                var div = document.getElementById("div" + i);
-                div.innerHTML = "";
+            var div = document.getElementById("div0");
+            div.innerHTML = "";
 
-                var p1 = document.createElement("p");
-                var text1 = document.createTextNode("Índice de qualidade do ar: " + json[i]["aqi"]);
-                p1.appendChild(text1);
-                div.append(p1);
+            var p1 = document.createElement("p");
+            var text1 = document.createTextNode("Índice de qualidade do ar: " + json[0]["aqi"]);
+            p1.appendChild(text1);
+            div.append(p1);
 
-                var p2 = document.createElement("p");
-                var text2 = document.createTextNode("Concentração de O3(µg / m³): " + json[i]["o3"]);
-                p2.appendChild(text2);
-                div.append(p2);
+            var p2 = document.createElement("p");
+            var text2 = document.createTextNode("Concentração de O3(µg / m³): " + json[0]["o3"]);
+            p2.appendChild(text2);
+            div.append(p2);
 
-                var p3 = document.createElement("p");
-                var text3 = document.createTextNode("Concentração de CO(µg / m³): " + json[i]["co"]);
-                p3.appendChild(text3);
-                div.append(p3);
+            var p3 = document.createElement("p");
+            var text3 = document.createTextNode("Concentração de CO(µg / m³): " + json[0]["co"]);
+            p3.appendChild(text3);
+            div.append(p3);
 
-                var p4 = document.createElement("p");
-                var text4 = document.createTextNode("Concentração de SO2(µg / m³): " + json[i]["so2"]);
-                p4.appendChild(text4);
-                div.append(p4);
+            var p4 = document.createElement("p");
+            var text4 = document.createTextNode("Concentração de SO2(µg / m³): " + json[0]["so2"]);
+            p4.appendChild(text4);
+            div.append(p4);
 
-                var p5 = document.createElement("p");
-                var text5 = document.createTextNode("Concentração de NO2(µg / m³): " + json[i]["no2"]);
-                p5.appendChild(text5);
-                div.append(p5);
-            }
+            var p5 = document.createElement("p");
+            var text5 = document.createTextNode("Concentração de NO2(µg / m³): " + json[0]["no2"]);
+            p5.appendChild(text5);
+            div.append(p5);
+
         }
     </script>
 </body>

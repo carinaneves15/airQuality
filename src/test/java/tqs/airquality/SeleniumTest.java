@@ -69,7 +69,7 @@ public class SeleniumTest {
     public void testPresence() {
         int count = 0;
         boolean presence;
-        String[] aux = {"selectCity", "div0", "div1", "div2", "div3", "div4"};
+        String[] aux = {"selectCity", "div0", "info"};
 
         List<String> elementes = new ArrayList<>();
         for (String s : aux) {
