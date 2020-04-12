@@ -1,5 +1,11 @@
 package tqs.airquality;
 
+/**
+ * AirQualityInfo.java
+ * Purpose: Selection of parameters to be obtained from the external API
+ *
+ * @author Carina Neves
+ */
 public class AirQualityInfo {
     private String aqi;
     private String o3;

@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * AirQualityController.java
+ *
+ * @author Carina Neves
+ */
+
 @RestController
 @RequestMapping("/api/airQuality")
 public class AirQualityController {

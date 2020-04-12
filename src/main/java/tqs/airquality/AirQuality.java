@@ -1,6 +1,13 @@
 package tqs.airquality;
 
+/**
+ * AirQuality.java
+ * Purpose: Value to be attributed to each different city
+ *
+ * @author Carina Neves
+ */
 public class AirQuality {
+
     private AirQualityInfo[] data;
     private long timestamp;
 
