@@ -1,6 +1,8 @@
 package tqs.airquality;
 
+import io.github.bonigarcia.seljup.SeleniumExtension;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -12,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(SeleniumExtension.class)
 public class SeleniumTest {
     private WebDriver driver;
     private String baseUrl;
