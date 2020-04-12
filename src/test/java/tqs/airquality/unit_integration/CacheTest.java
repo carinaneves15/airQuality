@@ -1,9 +1,12 @@
-package tqs.airquality;
+package tqs.airquality.unit_integration;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import tqs.airquality.AirQuality;
+import tqs.airquality.AirQualityInfo;
+import tqs.airquality.Cache;
 
 import java.sql.Timestamp;
 import java.util.*;

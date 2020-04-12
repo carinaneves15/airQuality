@@ -1,4 +1,4 @@
-package tqs.airquality;
+package tqs.airquality.unit_integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +7,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import tqs.airquality.AirQualityController;
+import tqs.airquality.AirQualityInfo;
+import tqs.airquality.AirQualityService;
 
 import java.util.ArrayList;
 import java.util.HashMap;

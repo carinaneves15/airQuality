@@ -1,4 +1,4 @@
-package tqs.airquality;
+package tqs.airquality.unit_integration;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tqs.airquality.AirQuality;
+import tqs.airquality.AirQualityInfo;
+import tqs.airquality.AirQualityService;
+import tqs.airquality.Cache;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
