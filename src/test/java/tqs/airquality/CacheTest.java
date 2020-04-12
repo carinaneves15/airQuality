@@ -11,6 +11,12 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * CasheTest.java
+ *
+ * @author Carina Neves
+ */
+
 @SpringBootTest
 class CacheTest {
     protected Cache cache = new Cache();

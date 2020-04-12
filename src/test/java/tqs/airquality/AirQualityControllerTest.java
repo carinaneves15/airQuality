@@ -24,6 +24,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * AirQualityControllerTest.java
+ *
+ * @author Carina Neves
+ */
+
 @WebMvcTest(AirQualityController.class)
 class AirQualityControllerTest {
     @Autowired
@@ -31,10 +37,6 @@ class AirQualityControllerTest {
 
     @MockBean
     private AirQualityService airQualityService;
-
-    @BeforeEach
-    public void setUp() throws Exception{
-    }
 
     @Test
     public void givenCities_whenGetAllCities_thenReturnJsonArray() throws Exception {

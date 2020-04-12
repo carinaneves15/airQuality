@@ -16,6 +16,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * AirQualityServiceTest.java
+ *
+ * @author Carina Neves
+ */
+
+
 @ExtendWith(MockitoExtension.class)
 class AirQualityServiceTest {
 
