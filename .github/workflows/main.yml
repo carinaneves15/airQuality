@@ -6,7 +6,6 @@ on:
       - 'master'
 
 jobs:
-
   test:
     name: Test - Units & Integrations
     runs-on: ubuntu-18.04
@@ -17,7 +16,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.4
+        
       - name: Maven Package
         run: mvn -B clean package -DskipTests
       - name: Maven Verify
         run: mvn -B clean verify -Pintegration-test
+  
+
