@@ -9,18 +9,6 @@ jobs:
   test:
     name: Test - Units & Integrations
     runs-on: ubuntu-18.04
-  
-    env:
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: localhost:8080
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-firefox:3.141.59-gold
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
 
     steps:
       - uses: actions/checkout@v1
