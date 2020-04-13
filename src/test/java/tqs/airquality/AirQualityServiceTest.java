@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -81,7 +82,7 @@ class AirQualityServiceTest {
          int hit = 7;
          List<String> cities = Arrays.asList("Porto", "Santarém", "Aveiro");
 
-         HashMap<String, String> stat = airQualityService.getStatistics();
+         Map<String, String> stat = airQualityService.getStatistics();
          assertThat(stat)
             .hasSize(3)
             .containsKeys("hit", "miss", "citiesAirInfoIn")
@@ -98,11 +99,11 @@ class AirQualityServiceTest {
         AirQualityInfo info= airQualityService.getAirQuality(invalidCity)[0];
         assertThat(returned)
                 .hasSize(1);
-        assertEquals(info.getAqi(), null);
-        assertEquals(info.getO3(), null);
-        assertEquals(info.getCo(), null);
-        assertEquals(info.getSo2(), null);
-        assertEquals(info.getNo2(), null);
+        assertEquals(null, info.getAqi());
+        assertEquals(null, info.getO3());
+        assertEquals(null, info.getCo());
+        assertEquals(null, info.getSo2());
+        assertEquals(null, info.getNo2());
 
     }
 
@@ -116,11 +117,11 @@ class AirQualityServiceTest {
         AirQualityInfo info= airQualityService.getAirQuality(validCity)[0];
         assertThat(returned)
                 .hasSize(1);
-        assertEquals(info.getAqi(), "27");
-        assertEquals(info.getO3(), "57.5");
-        assertEquals(info.getCo(), "95");
-        assertEquals(info.getSo2(), "1.5");
-        assertEquals(info.getNo2(), "6");
+        assertEquals("27", info.getAqi());
+        assertEquals("57.5", info.getO3());
+        assertEquals("95", info.getCo());
+        assertEquals("1.5", info.getSo2());
+        assertEquals("6", info.getNo2());
      }
 
 }

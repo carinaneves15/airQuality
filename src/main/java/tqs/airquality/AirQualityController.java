@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * AirQualityController.java
@@ -28,7 +28,7 @@ public class AirQualityController {
     }
 
     @GetMapping("/statistics")
-    public HashMap<String, String> getStatistics() {
+    public Map<String, String> getStatistics() {
         return airQualityService.getStatistics();
     }
 

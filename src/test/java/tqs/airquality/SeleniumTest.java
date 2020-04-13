@@ -46,6 +46,7 @@ public class SeleniumTest {
 
     @Test
     public void test() throws Exception {
+        boolean allOK = false;
         driver.get("http://localhost:8080");
         List<String> cities = new ArrayList<>();
         String[] aux = {"Viana-do-Castelo", "Braga", "VilaReal", "Bragança", "Porto", "Aveiro", "Viseu", "Guarda",
@@ -60,7 +61,9 @@ public class SeleniumTest {
             new Select(driver.findElement(By.id("selectCity"))).selectByVisibleText(city);
             driver.findElement(By.id("info")).click();
             driver.findElement(By.xpath("//button[@type='button']")).click();
+            allOK = true;
         }
+        assertThat(allOK).isTrue();
     }
 
     private boolean isElementPresent(By by) {

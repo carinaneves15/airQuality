@@ -11,12 +11,12 @@ import java.util.*;
  */
 public class Cache {
     private static List<String> cities = new ArrayList<>();
-    private static Map<String, AirQuality> cache = new HashMap<>();
+    private static Map<String, AirQuality> cacheImpl = new HashMap<>();
     private static int miss = 0;
     private static int hit = 0;
 
     public Cache() {
-
+        // empty because there are no attributes to be initialized
     }
 
     /**
@@ -40,12 +40,12 @@ public class Cache {
      * @return statistics about operation
      * (countof requests, hits/misses and the saved cities)
      */
-    public HashMap getStatistics() {
+    public Map getStatistics() {
         hit++;
-        HashMap<String, String> statistics = new HashMap<>();
+        Map<String, String> statistics = new HashMap<>();
         statistics.put("miss", String.valueOf(miss));
         statistics.put("hit", String.valueOf(hit));
-        statistics.put("citiesAirInfoIn", cache.keySet().toString());
+        statistics.put("citiesAirInfoIn", cacheImpl.keySet().toString());
         return statistics;
     }
 
@@ -65,7 +65,7 @@ public class Cache {
      */
     public boolean isValid(String city) {
         long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
-        return (cache.containsKey(city) && currentTime - cache.get(city).getTimestamp() < 1200000);
+        return (cacheImpl.containsKey(city) && currentTime - cacheImpl.get(city).getTimestamp() < 1200000);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Cache {
      * @param airQuality Respective air quality
      */
     public void saveAirQuality(String city, AirQuality airQuality) {
-        cache.put(city.toLowerCase(), airQuality);
+        cacheImpl.put(city.toLowerCase(), airQuality);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Cache {
      * @return Respective air quality
      */
     public AirQuality getAirQuality(String city) {
-        return cache.get(city.toLowerCase());
+        return cacheImpl.get(city.toLowerCase());
     }
 
     /**
@@ -91,7 +91,7 @@ public class Cache {
      * @return Map with saved cities as well as their air qualities
      */
     public Map<String, AirQuality> getCache() {
-        return cache;
+        return cacheImpl;
     }
 
 }

@@ -48,7 +48,7 @@ class CacheTest {
         cache.setHit();
         hit++;
         cache.saveAirQuality("Porto", air);
-        HashMap<String, String> found = cache.getStatistics();
+        Map<String, String> found = cache.getStatistics();
         hit++;
 
         HashMap<String, String> expected = new HashMap<>();
@@ -70,7 +70,7 @@ class CacheTest {
         expected.put("hit", "1");
         // 1 porque ir aceder às estatisticas conta como solicitação ocorrida
         expected.put("citiesAirInfoIn", citiesAirInfoIn.toString());
-        HashMap<String, String> found = cache.getStatistics();
+        Map<String, String> found = cache.getStatistics();
 
         assertThat(expected).isEqualTo(found);
     }

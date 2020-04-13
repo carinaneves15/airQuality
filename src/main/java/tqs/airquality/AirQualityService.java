@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * AirQualityService.java
@@ -40,7 +40,7 @@ public class AirQualityService {
      * Get current statistics
      * @return
      */
-    public HashMap<String, String> getStatistics() {
+    public Map<String, String> getStatistics() {
         return cache.getStatistics();
     }
 
@@ -73,11 +73,8 @@ public class AirQualityService {
             }
             // if api does not return valid air quality then
             // we create a null object - preventing whitelabels
-            else {
-                AirQualityInfo nullInfo = new AirQualityInfo();
-                AirQualityInfo[] toReturn = {nullInfo};
-                return toReturn;
-            }
+            else
+                return new AirQualityInfo[] {new AirQualityInfo()};
         }
         // valid value just do get
         else {
