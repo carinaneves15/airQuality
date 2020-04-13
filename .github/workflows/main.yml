@@ -9,13 +9,10 @@ jobs:
   test:
     name: Test - Units & Integrations
     runs-on: ubuntu-18.04
-    
-    container:
-      image: node:13.6
-      options: --network-alias testHost
+  
     env:
       SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
+      TEST_HOST: localhost:8080
     services:
       hub:
         image: selenium/hub:3.141.59-gold
@@ -31,13 +28,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.4
-      
-      - name: Install
-        run: yarn
-      - name: Lint
-        run: yarn lint
-      - name: Test
-        run: yarn test
         
       - name: Maven Package
         run: mvn -B clean package -DskipTests
