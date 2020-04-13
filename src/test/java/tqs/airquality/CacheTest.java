@@ -68,6 +68,7 @@ class CacheTest {
         List<String> citiesAirInfoIn = new ArrayList<>();
         expected.put("miss", "0");
         expected.put("hit", "1");
+        // 1 porque ir aceder às estatisticas conta como solicitação ocorrida
         expected.put("citiesAirInfoIn", citiesAirInfoIn.toString());
         HashMap<String, String> found = cache.getStatistics();
 
@@ -90,7 +91,7 @@ class CacheTest {
         cache.addCity(city0);
         cache.addCity(city1);
         List<String> cities = cache.getCities();
-
+        System.out.println(cities);
         assertEquals(22, cities.size());
         assertThat(cities)
                 .contains(city0, city1)
@@ -104,6 +105,10 @@ class CacheTest {
     private void testGetCities() {
         List<String> cities = cache.getCities();
         assertEquals(20, cities.size());
+        assertThat(cities)
+                .contains("Viana-do-Castelo", "Braga", "VilaReal", "Bragança", "Porto", "Aveiro", "Viseu", "Guarda",
+                        "Coimbra", "CasteloBranco", "Leiria", "Santarém", "Lisboa", "Portalegre", "Évora", "Setubal",
+                        "Beja", "Faro", "Funchal", "PontaDelgada");
     }
 
     /**

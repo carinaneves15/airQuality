@@ -53,7 +53,7 @@ class AirQualityServiceTest {
         Mockito.when(cache.getCities()).thenReturn(allCities);
         Mockito.when(cache.getStatistics()).thenReturn(statistics);
         Mockito.when(cache.getAirQuality("Aveiro")).thenReturn(aveiro);
-        Mockito.when(cache.getAirQuality("aveiro")).thenReturn(null);
+        Mockito.when(cache.getAirQuality("blablabla")).thenReturn(null);
     }
 
     /**

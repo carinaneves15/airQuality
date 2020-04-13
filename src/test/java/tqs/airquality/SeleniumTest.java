@@ -14,6 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * SeleniumTest.java
+ *
+ * @author Carina Neves
+ */
+
 @ExtendWith(SeleniumExtension.class)
 public class SeleniumTest {
     private WebDriver driver;
@@ -30,13 +36,12 @@ public class SeleniumTest {
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    public void pullDown() throws Exception {
         driver.quit();
         String errorString = verificationErrors.toString();
         if (!"".equals(errorString)) {
             Assertions.fail(errorString);
         }
-
     }
 
     @Test
@@ -56,8 +61,8 @@ public class SeleniumTest {
             driver.findElement(By.id("info")).click();
             driver.findElement(By.xpath("//button[@type='button']")).click();
         }
-
     }
+
     private boolean isElementPresent(By by) {
         driver.get("http://localhost:8080");
         try {
@@ -86,4 +91,5 @@ public class SeleniumTest {
         }
         assertThat(count).isEqualTo(0);
     }
+
 }
